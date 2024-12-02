@@ -3,23 +3,9 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/wamp64/www/2025/Exam_sym/webcourses/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/wamp64/www/2025/Exam_sym/webcourses/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
     <main class="container">
         <section id="content">
-            <h1 class="display-6">Les Tendances Actuelles des Technologies Web</h1>
+            <h1 class="display-6">Bienvenu sur notre plateforme de cours en lignes</h1>
             <div class="card mb-5">
                 <div class="row g-0">
                     <div class="col-md-4">
@@ -27,9 +13,9 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">L'essor des Frameworks JavaScript modernes</h5>
-                            <p class="card-text">Les technologies web évoluent à une vitesse incroyable. Aujourd'hui, les développeurs ont accès à des outils puissants pour créer des sites et des applications plus dynamiques et interactifs que jamais. Les frameworks JavaScript modernes comme React, Vue.js et Angular sont devenus des piliers de cette transformation. Ils permettent de simplifier la création d'applications web complexes tout en garantissant des performances accrues. Que ce soit pour des applications mono-page ou des plateformes complètes, ces frameworks sont au cœur du web moderne.</p>
-                            <p class="card-text"><a href="#" class="btn btn-secondary">Tous les articles</a></p>
+                            <h5 class="card-title">Tenez-vous au courant des dernières nouveautés</h5>
+                            <p class="card-text">Ne manquez aucune actualité ! Découvrez les tendances, innovations et informations clés qui façonnent le monde d'aujourd'hui. Restez informé et à la pointe grâce à nos mises à jour régulières et détaillées. Soyez toujours en avance !</p>
+                            <p class="card-text"><a href="{{ path('app_news')}}" class="btn btn-secondary">Voir nouveautés</a></p>
                         </div>
                     </div>
 
@@ -43,9 +29,9 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">Le rôle de l'IA dans le développement web</h5>
-                            <p class="card-text">En parallèle, l'intelligence artificielle (IA) et le machine learning jouent un rôle de plus en plus important dans le développement web. Grâce à l'IA, il est possible d'améliorer l'expérience utilisateur, d'automatiser des tâches complexes ou encore de personnaliser les interactions en temps réel. Des chatbots aux systèmes de recommandation, l'IA enrichit les fonctionnalités des sites web tout en optimisant les performances globales. Avec cette fusion entre technologie web et intelligence artificielle, le futur du développement web promet d’être encore plus innovant et accessible.</p>
-                            <p class="card-text"><a href="" class="btn btn-secondary">Contact</a></p>
+                            <h5 class="card-title">Découvrez l'ensemble de nos formations</h5>
+                            <p class="card-text">Explorez notre catalogue complet de formations adaptées à tous les niveaux. Développez vos compétences, boostez votre carrière et atteignez vos objectifs grâce à des programmes conçus pour répondre aux besoins du marché. Inscrivez-vous dès aujourd'hui !</p>
+                            <p class="card-text"><a href="{{ path('app_courses') }}" class="btn btn-secondary">Formations disponibles</a></p>
                         </div>
                     </div>
                 </div>
