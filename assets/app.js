@@ -1,12 +1,12 @@
-import './bootstrap.js';
+import 'bootstrap';
 //bootstrap css
 import 'bootstrap/dist/css/bootstrap.min.css';
 //icofont.css
-import './styles/icofont.min.css';
+import './styles/icofont.css';
 // Custom css
 import './styles/app.css';
 //bootstrap JS
-import  './bootstrap';
+import  './bootstrap.js';
 /*
  * Welcome to your app's main JavaScript file!
  *
