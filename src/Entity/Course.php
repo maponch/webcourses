@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CourseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,11 +16,13 @@ class Course
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $category_id = null;
+    #[ORM\ManyToOne(targetEntity: Category::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
-    #[ORM\Column]
-    private ?int $level_id = null;
+    #[ORM\ManyToOne(targetEntity: Level::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Level $level = null;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -35,7 +39,7 @@ class Course
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $slug = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -44,34 +48,40 @@ class Course
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $program = null;
 
-    #[ORM\Column]
-    private ?int $commentaire_id = null;
+    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Comment::class, orphanRemoval: true)]
+    private Collection $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable(); // Date par défaut.
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCategoryId(): ?int
+    public function getCategory(): ?Category
     {
-        return $this->category_id;
+        return $this->category;
     }
 
-    public function setCategoryId(int $category_id): static
+    public function setCategory(?Category $category): static
     {
-        $this->category_id = $category_id;
+        $this->category = $category;
 
         return $this;
     }
 
-    public function getLevelId(): ?int
+    public function getLevel(): ?Level
     {
-        return $this->level_id;
+        return $this->level;
     }
 
-    public function setLevelId(int $level_id): static
+    public function setLevel(?Level $level): static
     {
-        $this->level_id = $level_id;
+        $this->level = $level;
 
         return $this;
     }
@@ -172,14 +182,28 @@ class Course
         return $this;
     }
 
-    public function getCommentaireId(): ?int
+    public function getComments(): Collection
     {
-        return $this->commentaire_id;
+        return $this->comments;
     }
 
-    public function setCommentaireId(int $commentaire_id): static
+    public function addComment(Comment $comment): static
     {
-        $this->commentaire_id = $commentaire_id;
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            if ($comment->getCourse() === $this) {
+                $comment->setCourse(null);
+            }
+        }
 
         return $this;
     }
