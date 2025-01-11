@@ -30,6 +30,9 @@ class UserFixtures extends Fixture
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setRole('ROLE_USER')
                 ->setPassword($this->hasher->hashPassword($user, 'password'));
+            $gender = ($gender ==  'male') ? 'm' : 'f';
+            $user->setImage('0'.($i+10).$gender.'.jpg');
+
             $manager->persist($user);
         }
 
@@ -42,7 +45,8 @@ class UserFixtures extends Fixture
             ->setEmail('john.doe@gmail.com')
             ->setCreatedAt(new \DateTimeImmutable())
             ->setRole('ROLE_ADMIN')
-            ->setPassword($this->hasher->hashPassword($user, 'password'));
+            ->setPassword($this->hasher->hashPassword($user, 'password'))
+            ->setImage('010m.jpg');
         $manager->persist($user);
         $manager->flush();
 

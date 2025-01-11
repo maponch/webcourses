@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#">Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Détail</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Commentaires</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Postez un commentaire</a>
+    </li>
+</ul>
+Cards :
+
+Utilisez les cards pour afficher la section contenant l'image et les informations.
+Exemple :
+
+html
+Copier le code
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="image.jpg" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">Dolore ratione.</h5>
+                <p class="card-text">Description de la formation.</p>
+                <p class="card-text"><small class="text-muted">Informations complémentaires</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+List Group :
+
+Pour les informations comme le prix, la durée, la catégorie, l'ajout, l'horaire, et le niveau, vous pouvez utiliser un list-group pour organiser les détails.
+Exemple :
+html
+Copier le code
+<ul class="list-group">
+    <li class="list-group-item">Prix : 400 €</li>
+    <li class="list-group-item">Durée : 2 ans</li>
+    <li class="list-group-item">Catégorie : Technique</li>
+    <li class="list-group-item">Ajouté le : 22/01/2019</li>
+    <li class="list-group-item">Horaire : Monday</li>
+    <li class="list-group-item">Niveau : BES</li>
+</ul>
+Grid System :
+
+Utilisez le système de grille Bootstrap pour organiser l'image et la description côte à côte.
+Exemple :
+
+html
+Copier le code
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="image.jpg" class="img-fluid" alt="...">
+        </div>
+        <div class="col-md-6">
+            <h5>Description</h5>
+            <p>Lorem ipsum dolor sit amet...</p>
+            <h6>Informations</h6>
+            <ul class="list-group">
+                <li class="list-group-item">Prix : 400 €</li>
+                <li class="list-group-item">Durée : 2 ans</li>
+                <!-- Ajoutez les autres détails ici -->
+            </ul>
+        </div>
+    </div>
+</div>

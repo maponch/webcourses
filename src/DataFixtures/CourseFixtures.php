@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Level;
 use App\Entity\Category;
+use App\Entity\User;
 use App\Entity\Course;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -17,6 +18,7 @@ class CourseFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create();
         $slugify = new Slugify();
+        $users = $manager->getRepository(User::class)->findAll();
         $categories = $manager->getRepository(Category::class)->findAll();
         $levels = $manager->getRepository(Level::class)->findAll();
         for ($i = 1; $i <= 25; $i++) {
@@ -29,7 +31,9 @@ class CourseFixtures extends Fixture implements DependentFixtureInterface
                 ->setDuration($faker->biasedNumberBetween(10,250))
                 ->setCategory($categories[array_rand($categories)])
                 ->setLevel($levels[array_rand($levels)])
-                ->setSlug($slugify->slugify($course->getName()));
+                ->setSlug($slugify->slugify($course->getName()))
+                ->setImage($i . '.jpg')
+                ->setUser($faker->randomElement($users));
             $manager->persist($course);
         }
         $manager->flush();
