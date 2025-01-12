@@ -22,7 +22,6 @@
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">{{ course.createdAt|date('d/m/Y') }}</li>
-                                        <li class="list-group-item">Auteur : {{ course.user.name }} {{ course.user.lastName }}</li>
                                         <li class="list-group-item">
                                             <a href="{{ path('app_course', {id: course.id}) }}" class="btn btn-outline-dark">Lire la suite</a>
                                         </li>

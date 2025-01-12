@@ -24,10 +24,6 @@ class Course
     #[ORM\JoinColumn(nullable: false)]
     private ?Level $level = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
-
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
@@ -55,26 +51,22 @@ class Course
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
 
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'courses')]
+    private Collection $user;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable(); // Date par défaut.
+        $this->user = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
     }
 
     public function getCategory(): ?Category
@@ -219,6 +211,30 @@ class Course
                 $comment->setCourse(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->user->contains($user)) {
+            $this->user->add($user);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        $this->user->removeElement($user);
 
         return $this;
     }

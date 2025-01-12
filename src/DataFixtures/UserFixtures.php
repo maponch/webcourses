@@ -28,7 +28,7 @@ class UserFixtures extends Fixture
                 ->setLastName($faker->lastName)
                 ->setEmail($faker->email)
                 ->setCreatedAt(new \DateTimeImmutable())
-                ->setRole('ROLE_USER')
+                ->setRoles(['ROLE_USER'])
                 ->setDisabled(0)
                 ->setPassword($this->hasher->hashPassword($user, 'password'));
             $gender = ($gender ==  'male') ? 'm' : 'f';
@@ -45,9 +45,10 @@ class UserFixtures extends Fixture
             ->setLastName('Doe')
             ->setEmail('john.doe@gmail.com')
             ->setCreatedAt(new \DateTimeImmutable())
-            ->setRole('ROLE_ADMIN')
+            ->setRoles(['ROLE_ADMIN'])
             ->setPassword($this->hasher->hashPassword($user, 'password'))
-            ->setImage('010m.jpg');
+            ->setImage('010m.jpg')
+            ->setDisabled(0);
         $manager->persist($user);
         $manager->flush();
 

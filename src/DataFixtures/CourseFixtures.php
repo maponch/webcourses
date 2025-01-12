@@ -32,8 +32,7 @@ class CourseFixtures extends Fixture implements DependentFixtureInterface
                 ->setCategory($categories[array_rand($categories)])
                 ->setLevel($levels[array_rand($levels)])
                 ->setSlug($slugify->slugify($course->getName()))
-                ->setImage($i . '.jpg')
-                ->setUser($faker->randomElement($users));
+                ->setImage($i . '.jpg');
             $manager->persist($course);
         }
         $manager->flush();
