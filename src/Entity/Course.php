@@ -16,11 +16,11 @@ class Course
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: Category::class)]
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'courses')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
-    #[ORM\ManyToOne(targetEntity: Level::class)]
+    #[ORM\ManyToOne(targetEntity: Level::class, inversedBy: 'courses')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Level $level = null;
 

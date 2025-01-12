@@ -29,6 +29,7 @@ class UserFixtures extends Fixture
                 ->setEmail($faker->email)
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setRole('ROLE_USER')
+                ->setDisabled(0)
                 ->setPassword($this->hasher->hashPassword($user, 'password'));
             $gender = ($gender ==  'male') ? 'm' : 'f';
             $user->setImage('0'.($i+10).$gender.'.jpg');

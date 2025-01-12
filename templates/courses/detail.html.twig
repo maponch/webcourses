@@ -1,75 +1,125 @@
 {% extends 'base.html.twig' %}
 
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link active" href="#">Profile</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Détail</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Commentaires</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Postez un commentaire</a>
-    </li>
-</ul>
-Cards :
+{% block body %}
 
-Utilisez les cards pour afficher la section contenant l'image et les informations.
-Exemple :
+<div class="container">
+    <!-- Onglets -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link">
+                <a href="{{ path('app_courses') }}" class="inherit">🠈Retour</a>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">
+                Profile
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="detail-tab" data-bs-toggle="tab" data-bs-target="#detail" type="button" role="tab" aria-controls="detail" aria-selected="false">
+                Détail
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="comments-tab" data-bs-toggle="tab" data-bs-target="#comments" type="button" role="tab" aria-controls="comments" aria-selected="false">
+                Commentaires
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="post-comment-tab" data-bs-toggle="tab" data-bs-target="#post-comment" type="button" role="tab" aria-controls="post-comment" aria-selected="false">
+                Postez un commentaire
+            </button>
+        </li>
+    </ul>
 
-html
-Copier le code
-<div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-        <div class="col-md-4">
-            <img src="image.jpg" class="img-fluid rounded-start" alt="...">
+    <!-- Contenu des onglets -->
+    <div class="tab-content" id="myTabContent">
+        <!-- Onglet Profile -->
+        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ asset('images/posts/'~course.image) }}" class="img-fluid rounded-start" alt="{{ course.name }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ course.name }}</h5>
+                            <p class="card-text">Description de la formation.</p>
+                            <p class="card-text"><small class="text-muted">{{ course.description }}</small></p>
+                        </div>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">Prix : {{course.price}}</li>
+                        <li class="list-group-item">Durée : {{ course.duration }} périodes</li>
+                        <li class="list-group-item">Catégorie : {{ course.category.name }}</li>
+                        <li class="list-group-item">Ajouté le : {{ course.createdAt|date('d/m/Y') }}</li>
+                        <li class="list-group-item">Niveau : {{ course.level.name }}</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title">Dolore ratione.</h5>
-                <p class="card-text">Description de la formation.</p>
-                <p class="card-text"><small class="text-muted">Informations complémentaires</small></p>
+
+        <!-- Onglet Détail -->
+        <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="detail-tab">
+            <div class="card" style="max-width: 540px;">
+                <div class="card-body">
+                    <h5 class="card-title">Plus d'explication sur la formation</h5>
+                    <p class="card-text">{{ course.description}}</p>
+                    <h5 class="card-title">Niveaux requis : {{ course.level.name }}</h5>
+                    <p class="card-text">{{ course.level.prerequisite }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Onglet Commentaires -->
+        <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Commentaires</h5>
+                    {% if comments is not empty %}
+                        {% for comment in comments %}
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col">
+                                                <img src="{{ asset('images/avatar/' ~ comment.user.image) }}" class="rounded-1 " style="width: 50px"/>
+                                            </div>
+                                            <div class="col">
+                                                <p class="card-text text-end">{{ comment.rate }} ✪</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-text fw-bolder">{{ comment.user.name }}</p>
+                                    <p class="card-text">{{ comment.content }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="card-text text-center">Aucun commentaire.</p>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Onglet Postez un commentaire -->
+        <div class="tab-pane fade" id="post-comment" role="tabpanel" aria-labelledby="post-comment-tab">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Postez un commentaire</h5>
+                    <form>
+                        <div class="mb-3">
+                            <label for="comment-content" class="form-label">Votre commentaire</label>
+                            <textarea class="form-control" id="comment-content" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
-List Group :
 
-Pour les informations comme le prix, la durée, la catégorie, l'ajout, l'horaire, et le niveau, vous pouvez utiliser un list-group pour organiser les détails.
-Exemple :
-html
-Copier le code
-<ul class="list-group">
-    <li class="list-group-item">Prix : 400 €</li>
-    <li class="list-group-item">Durée : 2 ans</li>
-    <li class="list-group-item">Catégorie : Technique</li>
-    <li class="list-group-item">Ajouté le : 22/01/2019</li>
-    <li class="list-group-item">Horaire : Monday</li>
-    <li class="list-group-item">Niveau : BES</li>
-</ul>
-Grid System :
 
-Utilisez le système de grille Bootstrap pour organiser l'image et la description côte à côte.
-Exemple :
-
-html
-Copier le code
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <img src="image.jpg" class="img-fluid" alt="...">
-        </div>
-        <div class="col-md-6">
-            <h5>Description</h5>
-            <p>Lorem ipsum dolor sit amet...</p>
-            <h6>Informations</h6>
-            <ul class="list-group">
-                <li class="list-group-item">Prix : 400 €</li>
-                <li class="list-group-item">Durée : 2 ans</li>
-                <!-- Ajoutez les autres détails ici -->
-            </ul>
-        </div>
-    </div>
-</div>
+{% endblock %}
