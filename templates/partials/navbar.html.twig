@@ -21,7 +21,7 @@
                     <div class="d-flex">
                         {% if not app.user %}
                         <a href="{{ path('app_login') }}" class="btn btn-outline-dark">S'identifier</a>&nbsp;&nbsp;
-                        <a href="#" class="btn btn-outline-dark">S'enregistrer</a>
+                        <a href="{{ path('app_register') }}" class="btn btn-outline-dark">S'enregistrer</a>
                         {% else %}
                         <div class="nav-item dropdown" style="padding-right: 50px;">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
