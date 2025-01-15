@@ -16,6 +16,13 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
+    public function averageRate()
+    {
+        return $this->createQueryBuilder('t')
+            ->select('SUM(t.rate) as total')
+            ->getQuery()
+            ->getResult();
+    }
     //    /**
     //     * @return Comment[] Returns an array of Comment objects
     //     */

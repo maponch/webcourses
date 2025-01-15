@@ -24,6 +24,7 @@ class CoursesController extends AbstractController
     #[Route('/course/{id}', name: 'app_course')]
     public function course(CourseRepository $repository,CommentRepository $commentRepository, int $id): Response
     {
+        dd($commentRepository->averageRate());
         $course = $repository->find($id);
         if (!$course) {
             throw $this->createNotFoundException('Ce cours n\'existe pas.');
