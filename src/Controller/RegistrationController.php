@@ -30,7 +30,7 @@ class RegistrationController extends AbstractController
                 ->setRoles(['ROLE_USER'])
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setDisabled(false)
-                ->setImage('deafult.png');
+                ->setImage('default.png');
 
             $entityManager->persist($user);
             $entityManager->flush();

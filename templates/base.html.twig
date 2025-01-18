@@ -11,10 +11,35 @@
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
+
     </head>
     <body>
         {% include 'partials/navbar.html.twig' %}
+        {% for label, messages in app.flashes %}
+            <div class="alert alert-{{ label }} alert-dismissible mt-2 flash-message">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
         {% block body %}{% endblock %}
+
         {% include 'partials/footer.html.twig' %}
+        <script>
+            // Attendre que la page soit complètement chargée
+            document.addEventListener('DOMContentLoaded', function () {
+                // Sélectionner tous les messages flash
+                const flashMessages = document.querySelectorAll('.flash-message');
+
+                // Parcourir les messages et les masquer après 10 secondes
+                flashMessages.forEach((message) => {
+                    setTimeout(() => {
+                        message.style.transition = "opacity 1s"; // Transition en douceur
+                        message.style.opacity = "0"; // Rendre invisible
+                        setTimeout(() => message.remove(), 1000; // Supprimer du DOM après la transition
+                    }, 1000); // 10 secondes
+                });
+            });
+        </script>
     </body>
 </html>

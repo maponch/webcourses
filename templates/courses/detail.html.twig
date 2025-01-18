@@ -113,10 +113,9 @@
                     <h5 class="card-title">Postez un commentaire</h5>
                     <form>
                         <div class="mb-3">
-                            <label for="comment-content" class="form-label">Votre commentaire</label>
-                            <textarea class="form-control" id="comment-content" rows="3"></textarea>
+                            <label for="comment-content" class="form-label">Ecrire un commentaire</label>
+                            <a href="{{ path('app_comment_new',  {id: course.id}) }}" class="btn btn-primary">Formulaire → </a>
                         </div>
-                        <button type="submit" class="btn btn-primary">Envoyer</button>
                     </form>
                 </div>
             </div>
