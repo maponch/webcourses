@@ -76,6 +76,9 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Commentaires</h5>
+                    {% if moyenne is not null %}
+                    avis global : {{ moyenne|number_format(2) }} ✪
+                    {% endif %}
                     {% if comments is not empty %}
                         {% for comment in comments %}
                             <div class="card">

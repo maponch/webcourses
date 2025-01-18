@@ -24,7 +24,7 @@ class CoursesController extends AbstractController
     #[Route('/course/{id}', name: 'app_course')]
     public function course(CourseRepository $repository,CommentRepository $commentRepository, int $id): Response
     {
-        dd($commentRepository->averageRate());
+        $moyenne = $commentRepository->averageRateForCourse($id);
         $course = $repository->find($id);
         if (!$course) {
             throw $this->createNotFoundException('Ce cours n\'existe pas.');
@@ -34,7 +34,8 @@ class CoursesController extends AbstractController
         ]);
         return $this->render('courses/detail.html.twig', [
             'course' => $course,
-            'comments' => $comments
+            'comments' => $comments,
+            'moyenne' => $moyenne
         ]);
     }
 

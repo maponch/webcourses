@@ -23,6 +23,15 @@ class CommentRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function averageRateForCourse(int $courseId): ?float
+    {
+        return $this->createQueryBuilder('c')
+            ->select('AVG(c.rate) as average_rate')
+            ->where('c.course = :courseId')
+            ->setParameter('courseId', $courseId)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
     //    /**
     //     * @return Comment[] Returns an array of Comment objects
     //     */
