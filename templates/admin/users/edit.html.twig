@@ -1,0 +1,12 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Gestion des utilisateurs{% endblock %}
+
+{% block body %}
+    {{ form_start(form.roles) }}
+    {{ form_widget(form.roles, { 'attr' :{ 'class' : 'form-check'}}) }}
+    {{ form_errors(form.roles) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+
+{% endblock %}

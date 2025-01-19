@@ -11,6 +11,10 @@
                 <th>Id</th>
                 <td>{{ user.id }}</td>
             </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('images/avatar/' ~ user.image) }}" alt="{{ user.name }}"></td>
+            </tr>
 
             <tr>
                 <th>Name</th>
@@ -39,8 +43,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_home') }}">back to list</a>
+    <a href="{{ path('app_admin_user') }}">🠈 Retour à la liste des utilisateurs</a>
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Editer cet utilisteur</a>
 
 {% endblock %}

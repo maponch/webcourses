@@ -3,6 +3,61 @@
 {% block title %}Gestion des utilisateurs{% endblock %}
 
 {% block body %}
+    <main class="container">
+        <section class="row">
+            <div class="col-md-10 offset-1">
+                <h1 class="display-4">Gestion des utilisateurs</h1>
+                <a href="#" class="btn btn-outline-dark">Ajouter un utilisateur</a>
+                <table class="table table-hover my-5">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Image</th>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Date</th>
+                            <th>Role</th>
+                            <th>Email</th>
+                            <th>Disabled</th>
 
-    Heyyy
+                            <th>Supprimer</th>
+                            <th>Edition</th>
+                            <th>Voir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td><img src="{{ asset('images/avatar/' ~ user.image) }}" alt="{{ user.name }}"></td>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.lastName }}</td>
+                            <td>{{ user.createdAt|date('d/m/Y') }}</td>
+                            <td>{{ user.roles | join(', ') }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.disabled ? 'Oui' : 'Non' }}</td>
+
+                            <td>
+                                <form method="post" action="{{ path('app_admin_delete', {'id': user.id}) }}" style="display: inline;">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                    <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                                        🗑
+                                    </button>
+                                </form>
+                            </td>
+                            <td><a href="{{ path('app_admin_edit', {'id': user.id}) }}">🖉</a></td>
+                            <td><a href="{{ path('app_admin_show', {'id': user.id}) }}">ʘ</a></td>
+
+
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <div class="pt-5 d-flex justify-content-center">
+            {{ knp_pagination_render(users) }}
+        </div>
+    </main>
 {% endblock %}
