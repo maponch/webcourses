@@ -10,3 +10,14 @@ footer {
 .flash-message {
     transition: opacity 1s ease-out;
 }
+/* Table */
+table img {
+    width: 50px;
+}
+
+table a {
+    text-decoration: none;
+}
+.fifty {
+    max-width: 360px;
+}

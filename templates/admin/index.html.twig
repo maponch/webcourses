@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}Hello AdminController!{% endblock %}
 
@@ -9,12 +9,44 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/wamp64/www/2025/Exam_sym/webcourses/src/Controller/AdminController.php</code></li>
-        <li>Your template at <code>C:/wamp64/www/2025/Exam_sym/webcourses/templates/admin/index.html.twig</code></li>
-    </ul>
+    <h1>Bienvenu sur la page admin! ✅</h1>
+    <div class="container text-center">
+        <div class="row ">
+            <div class="col-2">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active text-start" aria-current="page" href="{{ path('app_admin_courses') }}">Les cours</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-start" href="#">Les commentaires</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-start" href="#">Les users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-start" href="#">Les news</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-start">Les users bloqués</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col">
+                <div class="card fifty">
+                    <img src="{{ asset('images/avatar/' ~ user.image)  }}" class="card-img-top fifty" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Admin</h5>
+                        <p class="card-text">Connécté en tant qu'administrateur sur le site.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-start">Nom : {{ user.lastName }}</li>
+                        <li class="list-group-item text-start">Prénom : {{ user.name }}</li>
+                        <li class="list-group-item text-start">Email : {{ user.email }}</li>
+                        <li class="list-group-item text-start">Dernière mise à jour du profil: {{ user.updatedAt|date('d/m/Y') }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

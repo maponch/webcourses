@@ -1,10 +1,42 @@
 {% extends 'admin/base.html.twig' %}
-{% block title %}Administration{% endblock %}
+{% block title %}Administration course{% endblock %}
 {% block body %}
-    <section class="row">
-        <div class="col-md-9 offset-1">
-            <h2 class="display-5 my-4">Gestion des articles</h2>
-            <a href="" class="btn btn-outline-dark">Nouvel article</a>
-        </div>
-    </section>
+    <main class="container">
+        <section class="row">
+            <div class="col-md-10 offset-1">
+                <h1 class="display-4">Gestion des articles</h1>
+                <a href="{{ path('app_admin_newcourse') }}" class="btn btn-outline-dark">Ajouter un article</a>
+                <table class="table table-hover my-5">
+                    <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Titre</th>
+                        <th>Date</th>
+                        <th>Catégorie</th>
+                        <th>niveaux</th>
+                        <th>Durée</th>
+                        <th>supprimer</th>
+                        <th>edition</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cours in courses %}
+                        <tr>
+                            <td><img src="{{ asset('images/posts/' ~ cours.image) }}" alt="{{ cours.name }}"></td>
+                            <td>{{ cours.name }}</td>
+                            <td>{{ cours.createdAt|date('d/m/Y') }}</td>
+                            <td>{{ cours.category.name }}</td>
+                            <td>{{ cours.level.name }}</td>
+                            <td>{{ cours.duration }}</td>
+                            <td><a href="{{ path('app_admin_delcourse', {id: cours.id}) }}"><i class="icofont-ui-delete"></i>🗑</a></td>
+                            <td><a href="{{ path('app_admin_editcours', {id: cours.id}) }}">🖉</a></td>
+
+    
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
 {% endblock %}

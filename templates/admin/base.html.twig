@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8" lang="fr">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ asset('node_modules/icofont/icofont.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icofont/1.0.1/css/icofont.min.css">
+
+
     <title>{% block title %}Administration{% endblock %}</title>
+
     {% block stylesheets %}
     {% endblock %}
     {% block javascripts %}
@@ -12,6 +17,14 @@
 </head>
 <body>
 {% include 'admin/partials/navbar.html.twig' %}
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }} mt-2">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
 {% block body %}{% endblock %}
+{% include 'admin/partials/footer.html.twig' %}
 </body>
 </html>
