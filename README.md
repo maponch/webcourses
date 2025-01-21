@@ -18,12 +18,12 @@
 02 - Base de donnée :
 - Lancer le serveur Apache
 - Dans phpMyAdmin, créer une base de données du même nom que celle du projet : webcourses
-- Vérifier le fichier .env et faire correspondre :
+- Vérifier si le fichier .env correspond :
    DATABASE_URL="mysql://root:@127.0.0.1:3306/webcourses?serverVersion=8.0.31&charset=utf8mb4"
-- Une fois que la connexion entre la DB et le projet est effectuer
 - Lancer la commande pour créer la base données : php bin/console doctrine:database:create
 - Appliquer les migration : php bin/console doctrine:migrations:migrate
-
+- Une fois que la connexion entre la DB et le projet est effectuer
+  
 03 - initialisation du projet : 
 - Installer les dépendances via la commande dans le terminale de votre ide : composer install
 - Générer les données factice à l'aide la commande dans le terminale de votre ide : php bin/console doctrine:fixtures:load
